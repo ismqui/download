@@ -1,24 +1,21 @@
 defmodule Download do
 
-  import Download.FileName
+  alias Download.FileName
 
   @moduledoc """
-  Documentation for Download.
+  Module contains the API for the application.
   """
 # "http://www.ine.es/jaxi/files/_px/es/csv_c/t26/p067/p01/serie/l0/01001.csv_c?nocab=1"
   @doc """
-  Hello world.
+  Downloads a file from an url and saves it in a given directory and name.
 
   ## Examples
-
-      iex> Download.hello
-      :world
+      iex> url = "http://www.ine.es/jaxi/files/_px/es/csv_c/t26/p067/p01/serie/l0/01001.csv_c?nocab=1"
+      iex> name = "assets/DatosAgua.txt"
+      iex> Download.get_file(url, name)
+      :ok
 
   """
-  def hello do
-    :world
-  end
-
-  defdelegate get_file(url), to: FileName
+  defdelegate get_file(url, name), to: FileName
 
 end

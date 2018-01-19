@@ -6,10 +6,12 @@ defmodule DownloadTest do
 
   test "download file from url that exist" do
     url = "http://www.ine.es/jaxi/files/_px/es/csv_c/t26/p067/p01/serie/l0/01001.csv_c?nocab=1"
-    assert FileName.get_file(url) == :ok
+    name = "assets/agua.dat"
+    assert FileName.get_file(url, name) == :ok
   end
 
   test "download file from url that does not exist" do
-    assert FileName.get_file("noexiste") == :error
+    name = "assets/agua.dat"
+    assert FileName.get_file("noexiste", name) == :error
   end
 end
