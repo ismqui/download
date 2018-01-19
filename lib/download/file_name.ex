@@ -14,13 +14,17 @@ defmodule Download.FileName do
 
   def download_file({:error, %HTTPoison.Error{reason: reason}}, _name) do
     IO.puts "Error, reason: #{reason}"
-    :error
+    {:error, reason}
   end
 
   def download_file({:ok, %HTTPoison.Response{body: body}}, name) do
-    IO.puts "Todo ok"
-    File.write!(name, body)
-    :ok
+    result = File.write(name, body)
+    case result do
+      :ok -> IO.puts "Todo ok"
+      {:error, reason} -> IO.puts "Something went wrong reason: #{reason}"
+    end
+
+    result
   end
 
 end
