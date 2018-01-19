@@ -1,4 +1,7 @@
 defmodule Download do
+
+  import Download.FileName
+
   @moduledoc """
   Documentation for Download.
   """
@@ -16,23 +19,6 @@ defmodule Download do
     :world
   end
 
-  def get_file(url) do
-  # %HTTPoison.Response{body: _body, status_code: status} = HTTPoison.get!(url)
-    get_data(url)
-  end
+  defdelegate get_file(url), to: FileName
 
-  def get_data(url) do
-    download_file(HTTPoison.get(url))
-  end
-
-  def download_file({:error, %HTTPoison.Error{reason: reason}}) do
-    IO.puts "Error, reason: #{reason}"
-    :error
-  end
-
-  def download_file({:ok, %HTTPoison.Response{body: body}}) do
-    IO.puts "Todo ok"
-    File.write!("assets/agua.dat", body)
-    :ok
-  end
 end
