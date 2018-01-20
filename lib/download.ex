@@ -5,7 +5,6 @@ defmodule Download do
   @moduledoc """
   Module contains the API for the application.
   """
-# "http://www.ine.es/jaxi/files/_px/es/csv_c/t26/p067/p01/serie/l0/01001.csv_c?nocab=1"
   @doc """
   Downloads a file from an url and saves it in a given directory and name.
 

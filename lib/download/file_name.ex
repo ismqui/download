@@ -5,10 +5,6 @@ defmodule Download.FileName do
   """
 
   def get_file(url, name) do
-    get_data(url, name)
-  end
-
-  def get_data(url, name) do
     download_file(HTTPoison.get(url), name)
   end
 
@@ -18,12 +14,18 @@ defmodule Download.FileName do
   end
 
   def download_file({:ok, %HTTPoison.Response{body: body}}, name) do
-    result = File.write(name, body)
-    case result do
-      :ok -> IO.puts "Todo ok"
-      {:error, reason} -> IO.puts "Something went wrong reason: #{reason}"
-    end
+    name
+    |> File.write(body)
+    |> save_file()
+  end
 
+  def save_file(:ok) do
+    IO.puts "Todo ok"
+    :ok
+  end
+
+  def save_file(result = {:error, reason}) do
+    IO.puts "Something went wrong reason: #{reason}"
     result
   end
 
